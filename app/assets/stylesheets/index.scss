@@ -1,0 +1,102 @@
+.table-borderless > tbody > tr > td {
+  border: none;
+}
+
+.tr-clickable:hover {
+  cursor: pointer;
+  background: hsla(180,0%,50%,0.25)!important;
+}
+
+.tr-clickable-related:hover {
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+}
+
+.required-star { 
+  font-size: 16px;
+  color: red;
+}
+
+.bookmark-star {
+  font-size: 30px;
+  float: right;
+}
+
+.title-logo-desc-index {
+  text-align: center;
+  letter-spacing: 4px;
+  color: #747474;
+  .title-h1 {
+    display: inline-block;
+    font-size: 60px;
+    color: #747474a1;
+  }
+  .title-img {
+    margin-bottom: 30px;
+  }
+}
+
+.titles-custom {
+  text-align: center;
+  letter-spacing: 4px;
+  color: #747474;
+  margin-bottom: 30px;
+}
+
+.no-content-messages {
+  @extend .titles-custom;
+  text-align: left;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.icon-as-btn {
+  font-size: 18px;
+}
+
+.no-order {
+  cursor: default!important;
+  padding-right: 5px!important;
+  text-align:center!important;
+  &:after {
+    content: none!important;
+  }
+}
+
+.edit-on-show-btn {
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.jumbotron {
+  background-color: transparent;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.index-small-boxes-home-page {
+  .small-box {
+    cursor: pointer;
+  }
+}
+
+.dataTables_length select, .dataTables_filter input {
+   background: hsla(180,0%,50%,0.25);
+   color: #fff;
+}
+
+.paginate_button a {
+  border-color: #fff!important;
+  background: hsla(180,0%,50%,0.25)!important;
+  color: #fff!important;
+}
+
+.paginate_button.active a {
+  background-color: gray!important;
+}

@@ -1,0 +1,88 @@
+<div class="form-group">
+  <%= f.label t('Related roles'), for: "role_related_roles" %> <%= raw ' <sup class="required-star">*</sup> ' if defined? make_role_req %>
+  <input name="rel_roles_ids" class="hide" value="<%= role_ids %>" type="text" />
+  <select class="form-control select2" id="roles_rel_multiselect" <%= " required " if defined? make_role_req %> multiple="multiple">
+    <% @rel_roles.each do |item| %>
+      <option value="<%= item.id %>"><%= item.name %> <small>(<%= item.locale %>)</small></option>
+    <% end if !@rel_roles.blank? %>
+  </select>
+</div>
+<div class="form-group">
+  <%= f.label t('Related processes'), for: "role_related_process_lts" %>
+  <input name="rel_processes_ids" class="hide" value="<%= process_ids %>" type="text" />
+  <select class="form-control select2" id="processes_rel_multiselect" multiple="multiple">
+    <% @rel_processes.each do |item| %>
+      <option value="<%= item.id %>"><%= item.name %> <small>(<%= item.locale %>)</small></option>
+    <% end if !@rel_processes.blank? %>
+  </select>
+</div>
+<div class="form-group">
+  <%= f.label t('Related tasks'), for: "role_related_tasks" %>
+  <input name="rel_tasks_ids" class="hide" value="<%= task_ids %>" type="text" />
+  <select class="form-control select2" id="tasks_rel_multiselect" multiple="multiple">
+    <% @rel_tasks.each do |item| %>
+      <option value="<%= item.id %>"><%= item.name %> <small>(<%= item.locale %>)</small></option>
+    <% end if !@rel_tasks.blank? %>
+  </select>
+</div>
+
+<div class="form-group">
+  <%= f.label t('Related links'), for: 'role_related_links' %>
+  <% if defined? entity %>
+    <table id="links-table" class="table borderless">
+      <tbody>
+        <% decode_links(entity.related_links).each do |link| %>
+          <tr>
+            <td class="name-of-related-link"> <%= link_to link[:name], link[:url], target: '_blank' %> </td>
+            <td> <%= link_to '#' do %> <i class="fa fa-trash-o related-link-trash"></i> <% end %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  
+  <%= f.text_field :related_links, class: 'form-control hide' %>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#related-links-modal">
+    <%= t('Add related link') %>
+  </button>
+</div>
+
+<div class="form-group hide">
+  <%= f.label t('Related attachments'), for: "role_related_attachments" %>
+  <%= f.text_field :related_attachments, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :inactive, 'data-toggle' => 'tooltip', 'title' => 'Check for making content unavailable to users' do %> 
+    <%= f.check_box :inactive, style: 'height:20px;width:20px;float:left;'%>&nbsp;&nbsp;<%= t('Inactive') %>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= f.label :restricted, 'data-toggle' => 'tooltip', 'title' => 'Check for restricting content from users outside the department' do %> 
+    <%= f.check_box :restricted, style: 'height:20px;width:20px;float:left' %>&nbsp;&nbsp;<%= t('Restricted') %> 
+  <% end %>
+</div>
+
+
+
+<div class="modal fade" id="related-links-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= t('Insert related link') %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="form-control link-name-value" placeholder="<%= t('Link name') %>..." /> <br/>
+          <input type="text" class="form-control link-url-value" placeholder="<%= t('Link url') %>..." />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><%= t('Close') %></button>
+        <button type="button" class="btn btn-primary add-link-from-modal-btn"><%= t('Add') %></button>
+      </div>
+    </div>
+  </div>
+</div>

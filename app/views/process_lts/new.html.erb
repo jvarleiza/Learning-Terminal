@@ -1,0 +1,11 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('New process') + " - (" + t('English') + ")"  %></h1>
+    </div>
+    <%= render 'form' %>
+    <%= link_to 'Back', :back, class: "btn btn-default" %>
+  </section>
+</div>

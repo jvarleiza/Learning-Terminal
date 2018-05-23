@@ -1,0 +1,13 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('Editing task') %></h1>
+    </div>
+    
+    <%= render 'form' %>
+    <%= link_to t('Show'), @task, class: 'btn btn-default' %>
+    <%= link_to t('Back'), tasks_admin_path, class: 'btn btn-default' %>
+  </section>
+</div>

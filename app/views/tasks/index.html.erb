@@ -1,0 +1,76 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('Tasks of the week') %></h1>
+    </div>
+    
+    <div class="container jumbotron" style="text-align:center">
+      <div style="<%= get_task_color_no_float 'daily' %>"></div>
+      <label><%= t('Daily') %></label>&nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'weekly' %>"></div>
+      <label><%= t('Weekly') %></label> &nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'bi_weekly' %>"></div>
+      <label><%= t('Biweekly') %></label> &nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'monthly' %>"></div>
+      <label><%= t('Monthly') %></label> &nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'quarterly' %>"></div>
+      <label><%= t('Quarterly') %></label> &nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'bi_annually' %>"></div>
+      <label><%= t('Biannually') %></label> &nbsp;&nbsp;&nbsp;
+      <div style="<%= get_task_color_no_float 'annually' %>"></div>
+      <label><%= t('Annually') %></label> 
+    </div>
+    
+    <div class="col-md-2 col-md-offset-1 form-group" style="padding:0">
+      <label><%= t('Select role to filter') %></label>
+      <select id="roles-filter" class="form-control">
+        <% @roles_for_dept.each do |role| %>
+          <option value="<%= role.id %>"><%= role.name %></option>
+        <% end %>
+      </select>
+    </div>
+    
+    <div class="row any-day-tasks" style="display:none">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="box box-primary">
+          <div style="min-height:100px" class="box-body no-padding">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title"><%= t('ANY DAY Tasks') %></h3>
+            </div>
+            <div class="box-body">
+              <!--See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="todo-list"></ul>
+            </div>
+            <div class="overlay loading-spinner-div">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="box box-primary calendar-container">
+          <div style="min-height:200px" class="box-body no-padding">
+             <!--THE CALENDAR -->
+            <div id="calendar"></div>
+            <div class="overlay loading-spinner-div">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row no-tasks-message" style="display:none">
+      <div class="col-md-10 col-md-offset-1">
+        <%= print_no_content_message 'No tasks for the selected role' %>
+      </div>
+    </div>
+    
+  </section>
+</div>

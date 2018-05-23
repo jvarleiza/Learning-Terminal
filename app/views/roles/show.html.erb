@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  <section class="content">
+    <%= render "/shared/notice/success", message: notice, id: "notice" %>
+    
+    <div class="titles-custom">
+      <h1><%= t('Role')%>: <%= @role.name %></h1>
+    </div>
+    
+    <% if can_edit_content %>
+      <div class="edit-on-show-btn">
+        <%= link_to edit_role_path(@role), class: 'btn btn-default' do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <%= render 'shared/show_pages/related_entities_on_show', :roles => @role.roles.order(:name), 
+    :process_lts => @role.process_lts.order(:name), :tasks => @role.tasks.order(:name) %>
+    <div class="box box-default">
+      <%= render 'shared/show_pages/content_header_on_show' %>
+      <div class="box-body main-content-show-section">
+        <%= render 'shared/show_pages/content_on_show',
+            entity: @role,
+            data_type: 'role',
+            data_id: @role.id,
+            is_bookmarked: @is_bookmarked
+        %>
+        <%= render 'shared/show_pages/links_on_show', :related_links => @role.related_links, :related_attachments => @role.related_attachments %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <%= render 'shared/show_pages/translations_on_show' %>
+      <%= render 'shared/show_pages/quality_tip_on_show' %>
+    </div>
+  </section>
+</div>
+<textarea id="data-to-print" class="hide"><%= @role.to_json %></textarea>

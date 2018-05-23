@@ -1,0 +1,227 @@
+<head>
+  <title>VideoDemoRailSiteJVWebsite</title>
+  <css>
+    
+    pre {
+      background-color:#EEEEEE;
+      font-size:11px;
+      padding:10px;
+    }
+
+    html, body {
+      height:100%;
+      font-size: 12px;
+    }
+
+    body {
+      color:#59595B;
+      font-family:Arial,Helvetica,sans-serif;
+      list-style-type: square;
+    }
+
+    a {
+      color:#146EB4;
+      text-decoration:none;
+    }
+
+    a:hover, a:active, a.active {
+      color:#E47911;
+    }
+
+    a:hover {
+      text-decoration:underline;
+    }
+
+    h1, h2 {
+      color:#E47911;
+      font-size:18px;
+      font-weight:normal;
+      margin:0 0 9px;
+      padding:0;
+    }
+
+    h1 {
+      border-bottom:1px solid #59595B;
+      margin:19px 0 2px;
+      padding-bottom:3px;
+    }
+
+    img {
+      border:0 none;
+    }
+
+    label {
+      font-weight:bold;
+    }
+
+    #footer, #push {
+      height:49px;
+      padding-top: 10px;
+    }
+    #footer {
+      clear:both;
+      text-align:center;
+      width:100%;
+    }
+
+    #footer .logo {
+      margin-bottom:7px;
+    }
+
+    #footer .disclaimer {
+      background-color:#59595B;
+      clear:right;
+      color:white;
+      font-size:9px;
+      height:18px;
+      padding-top:8px;
+      text-align:center;
+      width:100%;
+    }
+
+    #page {
+      height:auto !important;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      min-height:100%;
+    }
+
+    h2.subtitle {
+      color: #59595B;
+      font-size: 16px;
+      border-bottom: 1px solid #59595B;
+      font-weight: bold;
+    }
+
+    h1.title {
+      border-bottom-style: none;
+      margin-bottom: 1em;
+    }
+
+  </css>
+</head>
+<body>
+  <div id="page">
+    <center>
+      <h1 class="title">
+        Welcome #{@remote_user}!
+        <br/>
+        This is your new Ruby on Rails website "VideoDemoRailSiteJVWebsite"
+      </h1>
+    </center>
+    <div id="started">
+      <h2 class="subtitle">Getting Started</h2>
+      <a href="https://w.amazon.com/index.php/RubyEnv" target="_blank">
+        <code>RubyEnv</code>
+      </a>
+      provides access to the standard suite of Ruby / Rails commands. Be sure to specify or default to the
+      latest version of ruby, unless you have a good reason not to!
+      <pre>
+        <preserve>
+          
+                rubyenv -l
+                rubyenv ruby
+                rubyenv rake
+                rubyenv rails
+                rubyenv irb
+
+        </preserve>
+      </pre>
+      When you want to run Rails commands on your project, simply change into the
+      <code>rails-root</code>
+      source folder in your website package and run one of the commands above.
+      <br/>
+      <br/>
+      For example, to perform a Rails generate:
+      <pre>
+        <preserve>
+          
+                rubyenv rails generate scaffold post subject:string body:text
+
+        </preserve>
+      </pre>
+      or run the development server on port 3000 (this can be changed in the Rakefile or OpConfig):
+      <pre>
+        <preserve>
+          
+                brazil-build server
+
+        </preserve>
+      </pre>
+      or list/run rake tasks on your Rakefile:
+      <pre>
+        <preserve>
+          
+                rubyenv rails -T
+
+        </preserve>
+      </pre>
+      Any other standard Rails command can be executed in this way, just make sure to run it through
+      <code>rubyenv</code>
+      following the command examples above and you are set!
+      <br/>
+      <br/>
+      <strong>What if I don't want to use RubyEnv?</strong>
+      <br/>
+      You'll have to manually reference the binaries on the command line, by doing something ugly like so:
+      <pre>
+        <preserve>
+          
+                $(brazil-bootstrap)/jruby9.x/bin/jruby
+                $(brazil-bootstrap)/jruby9.x/bin/rake
+                $(brazil-bootstrap)/jruby9.x/bin/irb
+                $(brazil-bootstrap)/jruby9.x/bin/jruby bin/rails
+
+        </preserve>
+      </pre>
+      You can create aliases for these commands in your
+      <code>~/.zshrc</code>
+      (or equivalent) shell config file.
+      <br/>
+      <br/>
+    </div>
+    <div id="faq">
+      <h2 class="subtitle">Frequently Asked Questions</h2>
+      <strong>What is included in my new Ruby on Rails website?</strong>
+      <ul>
+        <li>Brand spankin' new Ruby on Rails 5.0 application running on Puma</li>
+        <li>Midway authentication with automatic SSL redirection</li>
+        <li>Odin, QueryLog, and AppConfig support</li>
+        <li>Rubocop enabled with friendly defaults</li>
+      </ul>
+      <strong>Why are rake / rails commands failing?</strong>
+      <br/>
+      Are you using RubyEnv? Are you running RubyEnv in the rails-root directory? Does RubyEnv have a default ruby version?
+      <br/>
+      <br/>
+      <strong>Why is ActiveRecord not included by default?</strong>
+      <br/>
+      With Amazon pushing for
+      <%= succeed "," do %>
+        <a href="https://w.amazon.com/index.php/RollingStone">Rolling Stone</a>
+      <% end %>
+      <br/>
+      <br/>
+      <strong>Why is Sentry not included by default?</strong>
+      <br/>
+      Sentry is being deprecated in favor of Midway. Midway authentication is achieved through
+      consuming the
+      <a href="https://w.amazon.com/index.php/Midway/HowTo/Deploying_the_SSL_Proxy">
+        AWSSSLProxy
+      </a>
+      environment. You'll have to fully configure it if Octane doesn't do so for you already.
+      <br/>
+      <br/>
+      <strong>I have some questions, who do I ask?</strong>
+      <br/>
+      In almost all cases, reach out to the
+      <a href="mailto:rubyhackers@amazon.com">rubyhackers@</a>
+      for
+      any general questions about Ruby and/or Rails. Want to report a bug or buy us a beer for all of
+      this hard work? Contact ruby-core at
+      <%= succeed "." do %>
+        <a href="mailto:ruby-core@amazon.com">ruby-core@</a>
+      <% end %>
+    </div>
+  </div>
+</body>

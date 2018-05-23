@@ -1,0 +1,45 @@
+<div class="form-group">
+  <%= f.label t('Name'), for: "role_name" %> <sup class="required-star">*</sup>
+  <%= f.text_field :name, class: "form-control", required: true %>
+</div>
+
+<div class="form-group">
+  <%= f.label t('Description'), for: "role_description" %> <sup class="required-star">*</sup>
+  <%= f.text_area :description, rows: "3", class: "form-control", required: true  %>
+</div>
+
+<div class="form-group hide locale-select">
+  <%= f.label t('Language'), for: "role_locale" %> <sup class="required-star">*</sup>
+  <%= f.select :locale, @languages.invert, {}, { :class => 'form-control' } %>
+</div>
+
+
+<div class="form-group">
+  <%= f.label t('Department'), for: "role_departments" %> <sup class="required-star">*</sup>
+  <%= f.text_field :departments, class: 'hide' %>
+  <select class="form-control select2" id="departments_multiselect" >
+    <% @departments_f.each do |key, value| %>
+      <option value="<%= key %>"><%= value %></option>
+    <% end %>
+  </select>
+</div>
+
+
+<div class="form-group">
+  <%= f.label t('Countries'), for: "role_countries" %> <sup class="required-star">*</sup>
+  <%= f.text_field :countries, class: 'hide' %>
+  <select multiple class="form-control select2" required id="countries_multiselect" >
+    <% @countries.each do |key, value| %>
+      <option value="<%= key %>"><%= value %></option>
+    <% end %>
+  </select>
+</div>
+<div class="form-group">
+  <%= f.label t('Business units'), for: "role_business_units" %> <sup class="required-star">*</sup>
+  <%= f.text_field :building_types, class: 'hide' %>
+  <select multiple class="form-control select2" required id="business_units_multiselect" >
+    <% @business_units.each do |key, value| %>
+      <option value="<%= key %>"><%= value %></option>
+    <% end %>
+  </select>
+</div>

@@ -1,0 +1,112 @@
+<%= form_for @task, :html =>{ :class => 'edit-new-entity-form' } do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "#{pluralize(@task.errors.count, "error")} prohibited this Task from being saved:" %></h2>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h1 class="box-title"><%= @task.name %></h1>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <input class="hide" id="entity-id" name="entity-id" value="<%= @task.id %>" />
+          
+          <% if defined?(is_duplicate) && is_duplicate %>
+            <input class="hide" name="isDuplicate" value="true" />
+          <% end %>
+          
+          <% if (defined? selected_locale) %>
+            <input class="hide" name="selectedLocale" value="<%= selected_locale %>" />
+          <% end %>
+          
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_left', f: f %>
+            <div class="form-group">
+              <%= f.label t('Task frequency'), for: "task_type" %> <sup class="required-star">*</sup>
+              
+              <div style="margin-left:25px">
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "daily") %>
+                  <%= f.label t('Daily'), for: "task_task_type_daily" %>
+                  <div style="<%= get_task_color 'daily' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "weekly") %>
+                  <%= f.label t('Weekly'), for: "task_task_type_weekly" %>
+                  <div style="<%= get_task_color 'weekly' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "bi_weekly") %>
+                  <%= f.label t('Biweekly'), for: "task_task_type_bi_weekly" %>
+                  <div style="<%= get_task_color 'bi_weekly' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "monthly") %>
+                  <%= f.label t('Monthly'), for: "task_task_type_monthly" %>
+                  <div style="<%= get_task_color 'monthly' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "quarterly") %>
+                  <%= f.label t('Quarterly'), for: "task_task_type_quarterly" %>
+                  <div style="<%= get_task_color 'quarterly' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "bi_annually") %>
+                  <%= f.label t('Biannually'), for: "task_task_type_bi_annually" %>
+                  <div style="<%= get_task_color 'bi_annually' %>"></div><br/><br/>
+                </div>
+                <div class="radio">
+                  <%= radio_button("task", "task_type", "annually") %>
+                  <%= f.label t('Annually'), for: "task_task_type_annually" %>
+                  <div style="<%= get_task_color 'annually' %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_right', f: f, entity: @task,
+              role_ids: @task.roles.order(:name).pluck(:id, :name).join('@@'),
+              process_ids: @task.process_lts.order(:name).pluck(:id, :name).join('@@'),
+              task_ids: @task.tasks.order(:name).pluck(:id, :name).join('@@'),
+              make_role_req: true
+            %>
+            
+            <div class="form-group">
+              <%= f.label t('Schedule'), for: "task_day_of_week" %>
+              <%= f.select :day_of_week, @days_of_week.invert, {}, { class: 'form-control', style: 'width:130px;display:inline-block;' } %>
+              <label for="role_inactive"><%= t('Mark start') %>: <%= f.check_box :mark_start, 
+                    class: 'custom-checkbox' %></label>
+              
+              <div class="scheduled-time-div" style="<%= get_style_for_time_div @task %>">
+                <%= f.number_field :hour_start, class:'form-control', style:'width:60px;display:inline-block', 
+                value:"#{ get_value_or_default @task.hour_start, '0' }", min:'0', max:'23' %>:
+                
+                <%= f.number_field :min_start, class:'form-control', style:'width:60px;display:inline-block',
+                value:"#{get_value_or_default @task.min_start, '0'}", min:'0', max:'45', step:'15' %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label t('Duration'), for: "task_duration" %>
+              <%= f.number_field :duration, class:'form-control', style:'width:70px;display:inline-block;', 
+                  value:"#{ get_value_or_default @task.duration, '15' }", min:'15', max:'120', step:'15' %>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+        <div class="box-footer">
+          <%= f.submit t('Submit'), class: "btn btn-primary", style: "float:right;" %>
+        </div>
+    </div>
+  </div>
+<% end %>

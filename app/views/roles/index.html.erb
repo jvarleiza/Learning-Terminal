@@ -1,0 +1,132 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <%= render "/shared/notice/success", message: notice, id: "notice" %>
+    
+    <% if show_available_translations %>
+      <a href="#translations-box"><%= t('Missing translations') %></a>
+    <% end %>
+    
+    <div class="titles-custom">
+      <h1><%= t('Roles listing')%></h1>
+    </div>
+    
+    <div class="box">
+      <div class="box-header"></div>
+      <div class="box-body">
+        <table class="table table-bordered table-striped data-table-listing">
+          <thead>
+          <tr>
+            <th><%= t('Name') %></th>
+            <th><%= t('Description') %></th>
+            <th><%= t('Department') %></th>
+            <th><%= t('Countries') %></th>
+            <th><%= t('Building types') %></th>
+            <th class="no-order"><%= t('Active') %></th>
+            <th class="no-order"><%= t('Show') %></th>
+            <th class="no-order"><%= t('Edit') %></th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @roles.each do |role| %>
+            <tr>
+              <td>
+                <%= role.name %>
+              </td>
+              <td>
+                <%= role.description %>
+              </td>
+              <td>
+                <%= decode_list(role.departments, @departments).join(', ') %>
+              </td>
+              <td>
+                <%= decode_list(role.countries, @countries).join(', ') %>
+              </td>
+              <td>
+                <%= decode_list(role.building_types, @business_units).join(', ') %>
+              </td>
+              <td>
+                <% if role.inactive %>
+                  <i class="fa fa-times"></i>
+                <% else %>
+                  <i class="fa fa-check"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to role do %>
+                  <i class="fa fa-eye icon-as-btn"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to edit_role_path(role) do %>
+                  <i class="fa fa-pencil icon-as-btn"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <br/>
+    <%= link_to 'New Role', new_role_path, class: 'btn btn-default' %>
+    
+    <% if show_available_translations %>
+      <br /><br /><br />
+      <div class="box box-default collapsed-box" id="translations-box">
+        <div data-widget="collapse" class="box-header with-border div-cursor-pointer">
+          <h3 class="box-title"><%= t('Roles that are missing translation') %></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="box-body" style="display:none">
+          <table class="table table-striped table-listing table-responsive data-table-listing">
+            <thead>
+              <tr>
+                <th><%= t('Name') %></th>
+                <th class="no-order"><%= t('Active') %></th>
+                <th class="no-order"><%= t('Language') %></th>
+                <th class="no-order"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @roles.each do |role| %>
+                <% if !@lang_per_role[role.id].empty? %>
+                  <tr>
+                    <td>
+                      <%= role.name %>
+                    </td>
+                    <td>
+                      <% if role.inactive %>
+                        <i class="fa fa-times"></i>
+                      <% else %>
+                        <i class="fa fa-check"></i>
+                      <% end %>
+                    </td>
+                    <td>
+                      <select class="lang-select form-control" style="width:100%">
+                        <% @lang_per_role[role.id].each do |key, value| %>
+                          <option value="<%= key %>"><%= value %></option>
+                        <% end %>
+                      </select>
+                    </td>
+                    
+                    <td>
+                      <%= link_to roles_duplicate_path + "/#{role.id}/#{@lang_per_role[role.id].keys[0]}", class:'duplicate-btn' do %>
+                        <i class="fa fa-arrow-right icon-as-btn"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+    
+  </section>
+</div>

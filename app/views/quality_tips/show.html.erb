@@ -1,0 +1,10 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  <section class="content">
+    <div class="jumbotron">
+      <%= render 'shared/notice/success', notice: notice, id: 'notice' %>
+      <%= render 'shared/show_pages/content_on_show', entity: @quality_tip %>
+      <%= link_to t('Edit'), edit_quality_tip_path, class: 'btn btn-default' %>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,2 @@
+json.extract! task, :id, :name, :description, :start, :end, :task_type, :color, :locale, :departments, :countries, :building_types, :day_of_week, :hour_start, :min_start, :duration, :mark_start
+json.url task_url(task)

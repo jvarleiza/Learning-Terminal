@@ -1,0 +1,27 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('Quality Tips') %></h1>
+    </div>
+    
+    <% if @quality_tips.blank? %>
+      <%= print_no_content_message 'No quality tips for the selected department and language' %>
+    <% end %>
+    
+    <% @quality_tips.each do |quality_tip| %>
+      <div class="box box-default collapsed-box">
+        <div data-widget="collapse" class="box-header with-border div-cursor-pointer">
+          <h3 class="box-title"><%= quality_tip.name %></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="box-body" style="display:none">
+          <%= quality_tip.description %> <br/>
+        </div>
+      </div>
+    <% end %>
+  </section>   
+</div>

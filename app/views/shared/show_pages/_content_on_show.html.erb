@@ -1,0 +1,38 @@
+<% if defined? data_type %>
+<div class="bookmark-star" data-toggle="tooltip" title="<%= t('Mark content as favorite') %>">
+  <a href="#">
+    <% if is_bookmarked %>
+      <i class="fa fa-star text-yellow"></i>
+    <% else %>
+      <i class="fa fa-star-o text-yellow"></i>
+    <% end %>
+  </a>
+  <input data-type="<%= data_type %>" data-id="<%= data_id %>" data-user="<%= @remote_user %>" id="bookmark-info" class="hide" />
+</div>
+<% end %>
+
+<h1><%= entity.name %></h1>
+<p><%= entity.description %></p>
+<p><strong><%= t('Language') + ': ' %></strong><%= @languages[entity.locale] %></p>
+
+<p><strong><%= t('Department') %>:</strong></p>
+<ul>
+<% decode_list(entity.departments, @departments).each do |item|  %>
+  <li><%= item %></li>
+<% end %>
+</ul>
+
+<p><strong><%= t('Countries') %>:</strong></p>
+<ul>
+<% decode_list(entity.countries, @countries).each do |item|  %>
+  <li><%= item %></li>
+<% end %>
+</ul>
+
+<p><strong><%= t('Building types') %>:</strong></p>
+<ul>
+<% decode_list(entity.building_types, @building_types).each do |item|  %>
+  <li><%= item %></li>
+<% end %>
+</ul>
+<hr/>

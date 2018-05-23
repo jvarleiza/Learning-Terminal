@@ -1,0 +1,12 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('Duplicating process in') + " " + t(@selected_language) %></h1>
+    </div>
+    <%= render 'form', is_duplicate: true, selected_locale: @selected_locale %>
+    <%= link_to t('Show'), @process_lt, class: 'btn btn-default' %>
+    <%= link_to t('Back'), process_lt_path, class: 'btn btn-default' %>
+  </section>
+</div>

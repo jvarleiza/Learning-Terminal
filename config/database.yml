@@ -1,0 +1,47 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  reconnect: false
+  port: 8200
+  username: joaquin
+  password: passw0rd
+  
+development:
+  <<: *default
+  database: joaquin_test
+  host: euicqa.cluster-cfpvfjofkcg9.eu-west-1.rds.amazonaws.com
+  # odin_material: "com.amazon.learning.terminal.dev.db"
+  
+beta:
+  <<: *default
+  database: joaquin_test
+  host: euicqa.cluster-cfpvfjofkcg9.eu-west-1.rds.amazonaws.com
+  # odin_material: "com.amazon.learning.terminal.dev.db"
+
+# production:
+#   <<: *default
+#   database: Central_Count
+#   host: eucentralcount.cfpvfjofkcg9.eu-west-1.rds.amazonaws.com
+#   odin_material: "com.amazon.euicqaanalysts.mysql.eucentralcount.db.loader"
+
+#development:
+#  <<: *default
+#  database: prometheus_dev
+#  host: metricsdashboard-cluster.cluster-cfpvfjofkcg9.eu-west-1.rds.amazonaws.com
+#  odin_material: "com.amazon.euicqa.mysql.prometheus.root"
+
+#production:
+#  <<: *default
+#  database: repo_prod
+#  host: metricsdashboard-cluster.cluster-cfpvfjofkcg9.eu-west-1.rds.amazonaws.com
+#  odin_material: "com.amazon.euicqa.mysql.prometheus.root"
+
+
+#development:
+#   adapter: sqlite3
+#   database: db/development.sqlite3
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3

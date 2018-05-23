@@ -1,0 +1,18 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  <section class="content">
+      
+    <div class="row">
+      <div class="titles-custom">
+        <h1><%= t('Department overview') %></h1>
+      </div>
+    </div>
+      
+    <div class="row">
+        <%= render 'index/list', items: @roles, class_color: 'bg-aqua', box_title: 'Roles', type: 'role' %>
+        <%= render 'index/list', items: @process_lts, class_color: 'bg-green', box_title: 'Processes', type: 'process_lt'  %>
+        <%= render 'index/list', items: @tasks, class_color: 'bg-yellow', box_title: 'Tasks', type: 'task' %>
+    </div>
+      
+  </section>
+</div>

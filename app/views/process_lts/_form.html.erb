@@ -1,0 +1,66 @@
+<%= form_for @process_lt, :html =>{ :class => 'edit-new-entity-form' } do |f| %>
+  <% if @process_lt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "#{pluralize(@process_lt.errors.count, "error")} prohibited this process from being saved:" %></h2>
+      <ul>
+        <% @process_lt.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h1 class="box-title"><%= @process_lt.name %></h1>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <input class="hide" id="entity-id" name="entity-id" value="<%= @process_lt.id %>" />
+          
+          <% if defined?(is_duplicate) && is_duplicate %>
+            <input class="hide" name="isDuplicate" value="true" />
+          <% end %>
+          
+          <% if (defined? selected_locale) %>
+            <input class="hide" name="selectedLocale" value="<%= selected_locale %>" />
+          <% end %>
+          
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_left', f: f %>
+            <div class="form-group">
+              <%= f.label t('Content'), for: "process_lt_content" %>
+              <%= f.text_area :content, class: "form-control", style: "display:none;" %>
+              <div id="summernote"></div>
+              <p id="summernote-counter"></p>
+              <button type="button" id="editSummernote" style="display:none;" class="btn btn-inverse waves-effect waves-light m-t-20 edit-mode"><%= t('Edit') %></button>
+              <button type="button" id="backSummernote" class="btn btn-default waves-effect waves-light save-mode"><%= t('Back') %></button>
+              <button type="button" id="saveSummernote" class="btn btn-inverse waves-effect waves-light save-mode"><%= t('Preview') %></button>
+            </div>
+          </div>
+          
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_right', f: f, entity: @process_lt,
+              role_ids: @process_lt.roles.order(:name).pluck(:id).join('@@'),
+              process_ids: @process_lt.process_lts.order(:name).pluck(:id).join('@@'),
+              task_ids: @process_lt.tasks.order(:name).pluck(:id).join('@@')
+            %>
+          
+            <div class="form-group">
+              <%= f.label t('Embeded videos'), for: "process_lt_embeded_video" %>
+              <%= f.text_field :embeded_video, class: "form-control hide" %>
+              <input id="video-url-1" value="<%= get_video @process_lt.embeded_video, 0 %>" class="form-control" placeholder="Broadcast video URL 1 ..." type="text" />
+              <input id="video-url-2" value="<%= get_video @process_lt.embeded_video, 1 %>" class="form-control" placeholder="Broadcast video URL 2 ..." type="text" />
+              <input id="video-url-3" value="<%= get_video @process_lt.embeded_video, 2 %>" class="form-control" placeholder="Broadcast video URL 3 ..." type="text" />
+              <input id="video-url-4" value="<%= get_video @process_lt.embeded_video, 3 %>" class="form-control" placeholder="Broadcast video URL 4 ..." type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer">
+        <%= f.submit t('Submit'), class: "btn btn-primary", style: "float:right;" %>
+      </div>
+    </div>
+  </div>
+<% end %>

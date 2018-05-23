@@ -1,0 +1,13 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="titles-custom">
+      <h1><%= t('Editing process') %></h1>
+    </div>
+    <%= render 'form' %>
+    <%= link_to 'Show', @process_lt, class: "btn btn-default" %>
+    <%= link_to 'Back', :back, class: "btn btn-default" %>
+  </section>
+</div>
+

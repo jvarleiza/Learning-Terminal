@@ -1,0 +1,25 @@
+<div id="info-toast" class="callout callout-info" style="display:none; margin:15px;" >
+</div>
+
+<section class="content-header">
+  <div style="background-color: #f5f5f5;" class="row">
+    <% unless current_page?(root_url) %>
+      <%= link_to "javascript:window.history.back();", class: "btn btn-default", style: "margin-left:15px;margin-top:10px;" do %>
+          <i style="font-size:18px;" class="fa fa-long-arrow-left"></i>
+      <% end %>
+      
+      <!--Print icon on page-->
+      <% if print_option_should_appear %>
+        <%= link_to "#", class: "btn btn-default print-btn-on-header", style: "margin-left:5px;margin-top:10px;" do %>
+            <i style="font-size:18px;" class="fa fa-print"></i>
+        <% end %>
+      <% end %>
+      
+    <% end %>
+    <ol style="float:right;" class="breadcrumb-cust">
+      <li class="active"><%= t('Department') %>: <strong><%= t(cookies[:department]) %></strong></li>
+      <li class="active"><%= t('Country') %>: <strong><%= t(cookies[:country]) %></strong></li>
+      <li class="active"><%= t('Building type') %>: <strong><%= t(cookies[:business_unit]) %></strong></li>
+    </ol>
+  </div>
+</section>

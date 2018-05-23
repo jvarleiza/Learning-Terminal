@@ -1,0 +1,21 @@
+{ 
+    "task-colors" : {
+        "daily": "green",
+        "weekly": "#9400D3",
+        "bi_weekly": "#4B0082",
+        "monthly": "#0000FF",
+        "quarterly": "#FF7F00",
+        "bi_annually": "#FFDB58",
+        "annually": "#FF0000" 
+    },
+    "days-of-week": {
+        "-1": "Any day",
+        "0": "Sunday",
+        "1": "Monday",
+        "2": "Tuesday",
+        "3": "Wednesday",
+        "4": "Thursday",
+        "5": "Friday",
+        "6": "Saturday"
+    }
+}

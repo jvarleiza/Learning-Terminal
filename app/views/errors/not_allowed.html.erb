@@ -1,0 +1,17 @@
+<div class="content-wrapper">
+    <section class="content">
+        <div class="error-page">
+            <h3><i class="fa fa-warning text-orange"></i> Not allowed :-)</h3>
+            <p>You are not allowed to access this page. We are sorry.
+            Meanwhile, you may <a href="<%= root_path %>">return to home page</a> or try using the search form.</p>
+            <form action="/search" class="search-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

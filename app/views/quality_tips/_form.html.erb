@@ -1,0 +1,40 @@
+<%= form_for @quality_tip, :html =>{ :class => 'edit-new-entity-form' } do |f| %>
+  <% if @quality_tip.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@quality_tip.errors.count, "error")} prohibited this quality_tip from being saved:" %>
+      </h2>
+      <ul>
+        <% @quality_tip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h1 class="box-title"><%= @quality_tip.name %></h1>
+      </div>
+      <form role="form">
+        <div class="box-body">
+          <%= render 'shared/forms/common_fields_left', f: f %>
+          <div class="form-group">
+            <%= f.label :inactive do %>
+              <%= t('Inactive') %> <%= f.check_box :inactive, style: 'height:20px;width:20px;float:right;margin-left:10px;' %>
+            <% end %>              
+          </div>
+        </div>
+        <div class="box-footer">
+          <%= f.submit t('Submit'), class: "btn btn-primary", style: "float:right;" %>
+        </div>
+      </form>
+    </div>
+  </div>
+<% end %>
+
+
+<script>
+  $('.locale-select').removeClass('hide');
+</script>

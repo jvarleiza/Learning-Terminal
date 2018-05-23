@@ -1,0 +1,54 @@
+<% unless roles.empty? && process_lts.empty? && tasks.empty? %>
+
+  <div class="box box-default">
+    <div data-widget="collapse" class="box-header with-border div-cursor-pointer">
+      <h3 class="box-title"><%= t('Related') %></h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <% unless roles.empty? %>
+          <div class="col-lg-4">
+            <p>
+              <strong><%= t('Roles') %>:</strong><br/>
+              <ul>
+                <% roles.each do |r| %>
+                  <li><a href="<%= role_path(r) %>"><%= r.name %></a></li>
+                <% end %>
+              </ul>
+            </p>
+          </div>
+        <% end %>
+        
+        <% unless process_lts.empty? %>
+          <div class="col-lg-4">
+            <p>
+              <strong><%= t('Processes') %>:</strong><br/>
+              <ul>
+                <% process_lts.each do |pr| %>
+                  <li><a href="<%= process_lt_path(pr) %>"><%= pr.name %></a></li>
+                <% end %>
+              </ul>
+            </p>
+          </div>
+        <% end %>
+        
+        <% unless tasks.empty? %>
+          <div class="col-lg-4">
+            <p>
+              <strong><%= t('Tasks') %>:</strong><br/>
+              <ul>
+                <% tasks.each do |t| %>
+                  <li><a href="<%= task_path(t) %>"><%= t.name %></a></li>
+                <% end %>
+              </ul>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

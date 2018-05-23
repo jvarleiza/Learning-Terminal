@@ -1,0 +1,12 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+      <div class="titles-custom">
+        <h1><%= t('New quality tip') %></h1>
+      </div>
+      <%= render 'form' %>
+      <%= link_to 'Back', quality_tips_path, class: "btn btn-default" %>
+  </section>
+</div>
+

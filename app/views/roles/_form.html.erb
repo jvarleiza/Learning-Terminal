@@ -1,0 +1,52 @@
+<%= form_for @role, :html => { class: 'edit-new-entity-form' } do |f| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@role.errors.count, "error")} prohibited this role from being saved:" %>
+      </h2>
+      <ul>
+        <% @role.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h1 class="box-title"><%= @role.name %></h1>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <input class="hide" id="entity-id" name="entity-id" value="<%= @role.id %>" />
+          
+          <% if defined?(is_duplicate) && is_duplicate %>
+            <input class="hide" name="isDuplicate" value="true" />
+          <% end %>
+          
+          <% if (defined? selected_locale) %>
+            <input class="hide" name="selectedLocale" value="<%= selected_locale %>" />
+          <% end %>
+          
+          <!-- LEFT column fields -->
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_left', f: f %>
+          </div>
+          
+          <!-- RIGHT column fields -->
+          <div class="col-lg-6">
+            <%= render 'shared/forms/common_fields_right', f: f, entity: @role,
+              role_ids: @role.roles.order(:name).pluck(:id).join('@@'),
+              process_ids: @role.process_lts.order(:name).pluck(:id).join('@@'),
+              task_ids: @role.tasks.order(:name).pluck(:id).join('@@')
+            %>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer">
+        <%= f.submit t('Submit'), class: "btn btn-primary", style: "float:right;" %>
+      </div>
+    </div>
+  </div>
+<% end %>

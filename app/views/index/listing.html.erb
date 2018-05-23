@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  
+  <section class="content">
+    <div class="row">
+      <div class="titles-custom">
+        <h1><%= t(@title)%></h1>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-12">
+        <div class="box <%= @class_color %>" style="border-radius: 20px;">
+          <div class="box-header"></div>
+          <div class="box-body">
+            <table class="table table-condensed table-hover data-table-listing">
+              <thead>
+              <tr>
+                <th><%= t('Name') %></th>
+                <th><%= t('Description') %></th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @items.each do |item| %>
+                <tr data-href="<%= item[:url] %>" class="tr-clickable clickable-row">
+                  <td><%= item[:name] %></td>
+                  <td><%= item[:description] %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+</div>
+

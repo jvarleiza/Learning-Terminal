@@ -1,0 +1,103 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a href="<%= root_path %>" class="logo">
+      <span class="logo-mini"><b>LT</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Learning Terminal</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+    
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-tag"></i> <span data-code="<%= cookies[:department_code] %>" id="department-selected-on-header"><%= cookies[:department] %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <ul class="menu">
+                  <% @departments.each do |key, dep| %>
+                    <li><a data-code="<%= key %>" href="#" class="department-dropdown-header"><%= dep %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-language"></i>  <span data-code="<%= cookies[:language_code] %>" id="country-selected-on-header"><%= cookies[:language] %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <ul class="menu">
+                  <% @languages.each do |key, lang| %>
+                    <li><a data-code="<%= key %>" href="#" class="language-dropdown-header"><%= lang %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger"><%= @today_tasks.to_a.count %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">
+                <strong>
+                  <%= t("You have #{"task".pluralize(@today_tasks.to_a.count)} for today", :task_count => @today_tasks.to_a.count) %>
+                </strong>
+              </li>
+              <li>
+                <ul class="menu">
+                  <% @today_tasks.each do |t| %>
+                    <li><a href="<%= task_path(t) %>"><h3><%= t.name %></h3></a></li>
+                  <% end %>
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="<%= tasks_path %>"><strong><%= t("View all tasks") %></strong></a>
+              </li>
+            </ul>
+          </li>
+          
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="https://internal-cdn.amazon.com/badgephotos.amazon.com/?uid=<%=@remote_user%>" class="user-image img-circle" alt="User Image" width="36" alt="User Image">
+              <span class="hidden-xs"><%= @user.full_name %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="https://internal-cdn.amazon.com/badgephotos.amazon.com/?uid=<%=@remote_user%>" class="img-circle" alt="User Image">
+                <p>
+                  <a class="profile-pic" href="https://phonetool.amazon.com/users/<%=@remote_user%>" target="_blank"> 
+                    <%= @user.full_name %>
+                  </a>
+                  <small><%= @user.location %></small>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-right">
+                  <a href="https://phonetool.amazon.com/users/<%=@remote_user%>" target="_blank" class="btn btn-default btn-flat">Profile</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+</header>
+

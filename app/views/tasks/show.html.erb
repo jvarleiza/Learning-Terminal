@@ -1,0 +1,53 @@
+<div class="content-wrapper">
+  <%= render "/shared/page_header" %>
+  <section class="content">
+    <%= render "/shared/notice/success", message: notice, id: "notice" %>
+    
+    <div class="titles-custom">
+      <h1><%= t('Task')%>: <%= @task.name %></h1>
+    </div>
+    
+    <% if can_edit_content %>
+      <div class="edit-on-show-btn">
+        <%= link_to edit_task_path(@task), class: 'btn btn-default' do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <%= render 'shared/show_pages/related_entities_on_show', :roles => @task.roles.order(:name), 
+    :process_lts => @task.process_lts.order(:name), :tasks => @task.tasks.order(:name) %>
+    <div class="box box-default">
+      <%= render 'shared/show_pages/content_header_on_show' %>
+      <div class="box-body main-content-show-section">
+        <%= render 'shared/show_pages/content_on_show', 
+            entity: @task,
+            data_type: 'task',
+            data_id: @task.id,
+            is_bookmarked: @is_bookmarked
+        %>
+        <p>
+          <strong><%= t('Shedule') %>:</strong>
+          <%= show_task_schedule_correctly @task %>
+        </p>
+        <p>
+          <strong><%= t('Duration') %>:</strong>
+          <%= @task.duration %> mins
+        </p>
+        <p>
+          <strong><%= t('Type') %>:</strong>
+          <%= @task.task_type.upcase %>
+        </p>
+        <p>
+          <div style="height:50px;width:100%;background-color:<%= @task.color %>;"></div>
+        </p>
+        <%= render 'shared/show_pages/links_on_show', :related_links => @task.related_links, :related_attachments => @task.related_attachments %>
+      </div>
+    </div>
+    <div class="row">
+      <%= render 'shared/show_pages/translations_on_show' %>
+      <%= render 'shared/show_pages/quality_tip_on_show' %>
+    </div>
+  </section>
+</div>
+<textarea id="data-to-print" class="hide"><%= @task.to_json %></textarea>

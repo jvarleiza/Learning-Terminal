@@ -1,0 +1,1 @@
+json.array! @process_lts, partial: 'process_lts/process_lt', as: :process_lt

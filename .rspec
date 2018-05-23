@@ -1,0 +1,4 @@
+--tty
+--color
+--format html --out ../build/brazil-unit-tests/index.html
+--format documentation

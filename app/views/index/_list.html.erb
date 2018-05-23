@@ -1,0 +1,26 @@
+<div class="col-lg-4 col-md-4">
+    <div class="box <%= class_color %>" style="border-radius: 20px;">
+      <div class="box-header">
+          <h3 style="color:#fff"><%= t(box_title) %></h3>
+      </div>
+      <div class="box-body">
+        <table class="table table-condensed <%= type %>">
+          <thead>
+          <tr>
+            <th><%= t('Name') %></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            <% items.each do |item| %>
+            <tr data-id="<%= item[:id] %>" data-type="<%= type %>" class="tr-clickable-related click-to-highlight-related" 
+                data-roles="<%=item[:roles]%>" data-processes="<%=item[:processes]%>" data-tasks="<%=item[:tasks]%>">
+              <td><%= item[:name] %></td>
+              <td><a href="<%= item[:url] %>" style="color:#fff"><i class="fa fa-eye"></i></a></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
